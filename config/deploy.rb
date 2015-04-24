@@ -20,7 +20,11 @@ set :bundle_jobs, 4
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-
+set :ssh_options, {
+  keys: [File.expand_path('~/.ssh/150418')],
+  forward_agent: true,
+  auth_methods: %w(publickey)
+}
 # Default value for :format is :pretty
 # set :format, :pretty
 
