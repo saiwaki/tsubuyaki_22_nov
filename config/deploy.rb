@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'tsubuyaki'
-set :repo_url, 'git@github.com:daraf-jp/tsubuyaki_22_nov.git'
+set :repo_url, 'git@github.com:saiwaki/tsubuyaki_22_nov.git'
 set :deploy_to, '/home/saiwaki/tsubuyaki'
 set :scm, :git
 set :keep_releases, 5
@@ -13,18 +13,13 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
-# set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle}
-# set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
+set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle}
+set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
-# set :bundle_jobs, 4
+set :bundle_jobs, 4
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-set :ssh_options, {
-  keys: [File.expand_path('~/.ssh/150418')],
-  forward_agent: true,
-  auth_methods: %w(publickey)
-}
 # Default value for :format is :pretty
 # set :format, :pretty
 
@@ -44,7 +39,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    # invoke 'unicorn:restart'
+    invoke 'unicorn:restart'
   end
 
   after :publishing, :restart

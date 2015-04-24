@@ -4,6 +4,8 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
+set :branch, 'master'
+
 role :app, %w{saiwaki@52.68.124.72}
 role :web, %w{saiwaki@52.68.124.72}
 role :db,  %w{saiwaki@52.68.124.72}
@@ -20,7 +22,11 @@ server '52.68.124.72', user: 'saiwaki', roles: %w{web app}, my_property: :my_val
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
 # limited set of options, consult[net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start).
-#
+set :ssh_options, {
+  keys: [File.expand_path('~/.ssh/150418')],
+  forward_agent: true,
+  auth_methods: %w(publickey)
+}
 # Global options
 # --------------
 #  set :ssh_options, {
