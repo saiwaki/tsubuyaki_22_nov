@@ -3,7 +3,7 @@ require 'capistrano/deploy'
 
 require 'capistrano/rails'
 
-# require 'capistrano/rails/assets'
+require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
 require 'capistrano/rbenv'
 require 'capistrano/bundler'
