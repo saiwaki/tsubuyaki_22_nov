@@ -20,18 +20,8 @@ set :unicorn_pid, "/tmp/unicorn.pid"
 set :unicorn_config_path, "config/unicorn.rb"
 set :unicorn_rack_env, :production
 # set :unicorn_bin, "unicorn_rails"
-after 'deploy:publishing', 'deploy:restart'
 
 set :bundle_jobs, 4
-
-# Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 namespace :deploy do
 
@@ -54,7 +44,7 @@ namespace :deploy do
 
   after :publishing, :restart
   task :restart do
-    invoke 'unicorn:restart'
+    invoke 'unicorn:legacy_restart'
   end
 
   # after :finishing, 'deploy:sitemap:refresh'
