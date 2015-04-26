@@ -20,7 +20,7 @@ set :unicorn_pid, "/tmp/unicorn.pid"
 set :unicorn_config_path, "config/unicorn.rb"
 set :unicorn_rack_env, :production
 # set :unicorn_bin, "unicorn_rails"
-
+after 'deploy:publishing', 'deploy:restart'
 
 set :bundle_jobs, 4
 
