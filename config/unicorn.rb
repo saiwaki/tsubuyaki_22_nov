@@ -5,6 +5,10 @@ preload_app true  # 更新時ダウンタイム無し
 listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
+end
+
 before_fork do |server, worker|
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
