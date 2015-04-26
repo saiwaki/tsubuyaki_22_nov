@@ -6,7 +6,7 @@ listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
 app_path = "/home/saiwaki/tsubuyaki_22_nov"
-# working_directory "#{app_path}/current"
+working_directory "#{app_path}/current"
 
 before_fork do |server, worker|
   ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
@@ -18,14 +18,14 @@ before_fork do |server, worker|
 
   # Before forking, kill the master process that belongs to the .oldbin PID.
   # This enables 0 downtime deploys.
-  old_pid = "#{server.config[:pid]}.oldbin"
-  if old_pid != server.pid
-    begin
-      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-      Process.kill(sig, File.read(old_pid).to_i)
-    rescue Errno::ENOENT, Errno::ESRCH
-    end
-  end
+  # old_pid = "#{server.config[:pid]}.oldbin"
+  # if old_pid != server.pid
+  #   begin
+  #     sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+  #     Process.kill(sig, File.read(old_pid).to_i)
+  #   rescue Errno::ENOENT, Errno::ESRCH
+  #   end
+  # end
 end
 
 after_fork do |server, worker|
