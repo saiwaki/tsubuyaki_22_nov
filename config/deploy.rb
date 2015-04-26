@@ -13,13 +13,11 @@ set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rben
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
-set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle}
-# set :unicorn_pid, "#{shared_path}/tmp/unicorn.pid"
+set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle db/production.sqlite3}
 
 set :unicorn_pid, "/tmp/unicorn.pid"
 set :unicorn_config_path, "config/unicorn.rb"
 set :unicorn_rack_env, :production
-# set :unicorn_bin, "unicorn_rails"
 
 set :bundle_jobs, 4
 
