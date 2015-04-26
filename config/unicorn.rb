@@ -6,11 +6,9 @@ listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
 app_path = "/home/saiwaki/tsubuyaki_22_nov"
-before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
-end
 
 before_fork do |server, worker|
+  ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
   # the following is highly recomended for Rails + "preload_app true"
   # as there's no need for the master process to hold a connection
   if defined?(ActiveRecord::Base)
