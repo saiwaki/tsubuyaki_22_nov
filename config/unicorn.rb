@@ -6,7 +6,7 @@ listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
 app_path = "/home/saiwaki/tsubuyaki_22_nov"
-working_directory "#{app_path}/current"
+# working_directory "#{app_path}/current"
 
 before_fork do |server, worker|
   ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
