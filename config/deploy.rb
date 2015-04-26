@@ -19,6 +19,7 @@ set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bu
 set :unicorn_pid, -> { File.join(shared_path, "tmp", "pids", "unicorn.pid") }
 set :unicorn_config_path, "config/unicorn.rb"
 set :unicorn_rack_env, :production
+set :unicorn_bin, ->{"unicorn_rails"}
 
 set :bundle_jobs, 4
 
