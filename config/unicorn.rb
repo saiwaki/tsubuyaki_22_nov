@@ -6,6 +6,7 @@ listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
 before_fork do |server, worker|
+  ENV['BUNDLE_GEMFILE'] = File.expand_path('Gemfile', ENV['RAILS_ROOT'])
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
     Process.kill 'QUIT', Process.pid
