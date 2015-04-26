@@ -21,6 +21,10 @@ set :unicorn_config_path, "config/unicorn.rb"
 set :unicorn_rack_env, :production
 # set :unicorn_bin, "unicorn_rails"
 
+before_fork do |server, worker|
+  ENV['BUNDLE_GEMFILE'] = File.expand_path('Gemfile', ENV['RAILS_ROOT'])
+end
+
 set :bundle_jobs, 4
 
 namespace :deploy do
@@ -50,6 +54,4 @@ namespace :deploy do
   # after :finishing, 'deploy:sitemap:refresh'
   after :finishing, 'deploy:cleanup'
 end
-
-after 'deploy:publishing', 'deploy:restart'
 
