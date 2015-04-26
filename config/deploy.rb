@@ -44,9 +44,12 @@ namespace :deploy do
 
   after :publishing, :restart
   task :restart do
-    invoke 'unicorn:reload'
+    invoke 'unicorn:restart'
   end
 
   # after :finishing, 'deploy:sitemap:refresh'
   after :finishing, 'deploy:cleanup'
 end
+
+after 'deploy:publishing', 'deploy:restart'
+
