@@ -14,7 +14,11 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
 set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle}
-set :unicorn_pid, "#{shared_path}/tmp/unicorn.pid"
+# set :unicorn_pid, "#{shared_path}/tmp/unicorn.pid"
+
+set :unicorn_pid, -> { File.join(shared_path, "tmp", "pids", "unicorn.pid") }
+set :unicorn_config_path, "config/unicorn.rb"
+set :unicorn_rack_env, :production
 
 set :bundle_jobs, 4
 
