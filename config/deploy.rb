@@ -18,14 +18,6 @@ set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
 
 set :bundle_jobs, 4
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
-# Default value for :format is :pretty
-# set :format, :pretty
-
-# Default value for :log_level is :debug
-# set :log_level, :debug
-
 # Default value for :pty is false
 # set :pty, true
 
@@ -34,23 +26,10 @@ set :bundle_jobs, 4
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-
   desc 'Restart application'
   task :restart do
-    # invoke 'unicorn:restart'
+    invoke 'unicorn:restart'
   end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
 end
