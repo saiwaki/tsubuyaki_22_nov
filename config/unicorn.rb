@@ -5,6 +5,7 @@ preload_app true  # 更新時ダウンタイム無し
 listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
+app_path = "/home/saiwaki/tsubuyaki_22_nov"
 before_exec do |server|
   ENV['BUNDLE_GEMFILE'] = "#{app_path}/current/Gemfile"
 end
