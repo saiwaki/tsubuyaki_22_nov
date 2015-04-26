@@ -44,7 +44,7 @@ namespace :deploy do
 
   after :publishing, :restart
   task :restart do
-    invoke 'unicorn:legacy_restart'
+    invoke 'unicorn:reload'
   end
 
   # after :finishing, 'deploy:sitemap:refresh'
