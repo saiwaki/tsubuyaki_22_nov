@@ -6,14 +6,14 @@ listen "/tmp/unicorn.sock"
 pid "/tmp/unicorn.pid"
 
 before_fork do |server, worker|
-  Signal.trap 'TERM' do
-    puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
-    Process.kill 'QUIT', Process.pid
+  # the following is highly recomended for Rails + "preload_app true"
+  # as there's no need for the master process to hold a connection
+  if defined?(ActiveRecord::Base)
+    ActiveRecord::Base.connection.disconnect!
   end
 
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.connection.disconnect!
-
+  # Before forking, kill the master process that belongs to the .oldbin PID.
+  # This enables 0 downtime deploys.
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin
