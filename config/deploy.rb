@@ -14,6 +14,7 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all
 
 set :linked_dirs, %w{bin log tmp/backup tmp/pids tmp/cache tmp/sockets vendor/bundle }
+set :linked_files, %w{db/production.sqlite3}
 
 set :unicorn_pid, "/tmp/unicorn.pid"
 set :unicorn_config_path, "config/unicorn.rb"
