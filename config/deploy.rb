@@ -3,7 +3,7 @@ lock '3.2.1'
 
 set :application, 'tsubuyaki'
 set :repo_url, 'git@github.com:saiwaki/tsubuyaki_22_nov.git'
-set :deploy_to, '/home/saiwaki/tsubuyaki'
+set :deploy_to, '/home/saiwaki/tsubuyaki_22_nov'
 set :scm, :git
 set :keep_releases, 5
 
