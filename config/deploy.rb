@@ -26,10 +26,11 @@ set :bundle_jobs, 4
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-after 'deploy:publishing', 'deploy:restart'
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
     invoke 'unicorn:restart'
   end
 end
+after 'deploy:publishing', 'deploy:restart'
